@@ -6,45 +6,160 @@
     <title>Pars Studio | Projeler</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                    colors: { brand: { 50: '#f0f5ff', 100: '#e0ebff', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' } }
+                }
+            }
+        }
     </script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+        .glass-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
         .glow-hover:hover { box-shadow: 0 0 25px -5px rgba(59,130,246,0.4); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
+<body class="bg-slate-950 text-slate-100 min-h-screen relative overflow-x-hidden">
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full filter blur-[128px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-purple-600/15 rounded-full filter blur-[128px] pointer-events-none -z-10"></div>
     <header class="sticky top-0 z-50 backdrop-blur-md border-b border-slate-800/80 bg-slate-950/70">
-        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold">P</div>
-                <div><h1 class="font-bold text-lg">Pars Studio</h1><p class="text-xs text-slate-400">Proje Portfoyu</p></div>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/30">P</div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight tracking-wide text-white">Pars Studio</h1>
+                    <p class="text-xs text-slate-400 font-medium">Proje Portföyü & Dijital Araçlar</p>
+                </div>
             </div>
-            <a href="https://github.com/ermetasarim" class="text-slate-400 hover:text-white text-sm">GitHub</a>
+            <div class="flex items-center gap-3">
+                <a href="https://github.com/ermetasarim" target="_blank" rel="noopener noreferrer" class="p-2.5 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl transition-all flex items-center gap-2 text-sm font-medium">
+                    <i class="fa-brands fa-github text-lg"></i><span class="hidden sm:inline">GitHub</span>
+                </a>
+            </div>
         </div>
     </header>
-    <main class="max-w-7xl mx-auto px-4 py-12">
-        <div class="text-center mb-12">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">12 Canli Web Uygulamasi</div>
-            <h2 class="text-4xl font-extrabold">Gelistirilen Projeler</h2>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
+                <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                <span>12 Canlı Web Uygulaması</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">Geliştirilen Projeler ve <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Dijital Deneyimler</span></h2>
+        </div>
+        <div class="mb-10">
+            <div class="flex flex-wrap items-center gap-2" id="filter-tabs">
+                <button data-category="all" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-blue-600 text-white shadow-lg border border-blue-500">Tümü</button>
+                <button data-category="uygulama" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Uygulamalar</button>
+                <button data-category="oyun" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Oyunlar</button>
+                <button data-category="arac" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Araçlar</button>
+                <button data-category="kurumsal" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Forum</button>
+            </div>
         </div>
         <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Topluluk Forumu</h3><p class="text-slate-400 text-sm mb-6">Tartisma ve bilgi paylasimi.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">forum</span><a href="https://ermetasarim.github.io/forum" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Son Nobet</h3><p class="text-slate-400 text-sm mb-6">Kriz yonetimi simulasyonu.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">sonnobet</span><a href="https://ermetasarim.github.io/sonnobet" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Oyna</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Doviz ve Altin</h3><p class="text-slate-400 text-sm mb-6">Anlik kur takibi.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">doviz</span><a href="https://ermetasarim.github.io/doviz/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Butce Kontrol</h3><p class="text-slate-400 text-sm mb-6">Pars Ledger finans paneli.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">butce</span><a href="https://ermetasarim.github.io/butce/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Odak</h3><p class="text-slate-400 text-sm mb-6">Pomodoro sayaci ve yapilacaklar listesi.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">pomodoro</span><a href="https://ermetasarim.github.io/pomodoro/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Gram Birikim</h3><p class="text-slate-400 text-sm mb-6">Aylik altin alim simulasyonu.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">altin</span><a href="https://ermetasarim.github.io/altin/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Izleme Listesi</h3><p class="text-slate-400 text-sm mb-6">Film ve dizi rafi, puan ve durum.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">izle</span><a href="https://ermetasarim.github.io/izle/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Etkinlik Vitrini</h3><p class="text-slate-400 text-sm mb-6">Konser ve sahne bilet demosu.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">etkinlik</span><a href="https://ermetasarim.github.io/etkinlik/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Dijital Kartvizit</h3><p class="text-slate-400 text-sm mb-6">Pars Studio tek sayfa karti.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">kart</span><a href="https://ermetasarim.github.io/kart/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Yemek Tarifleri</h3><p class="text-slate-400 text-sm mb-6">Pratik tarif rehberi.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">yemek</span><a href="https://ermetasarim.github.io/yemek/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Hava Durumu</h3><p class="text-slate-400 text-sm mb-6">Konum tabanli tahmin.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">hava</span><a href="https://ermetasarim.github.io/hava/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
-            <div class="glass-card rounded-2xl p-6 flex flex-col justify-between"><div><h3 class="text-xl font-bold mb-2">Namaz Vakitleri</h3><p class="text-slate-400 text-sm mb-6">Sehirlere gore vakitler.</p></div><div class="pt-4 border-t border-slate-800 flex justify-between"><span class="text-xs text-slate-500">namaz</span><a href="https://ermetasarim.github.io/namaz/" class="px-4 py-2 bg-slate-800 rounded-xl text-xs">Ac</a></div></div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="kurumsal" data-title="forum">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-laptop-code"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">Forum</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Topluluk Forumu</h3>
+                <p class="text-slate-400 text-sm mb-6">Fikir alışverişi, tartışmalar ve bilgi paylaşımı için geliştirilmiş etkileşimli forum platformu.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">forum</span><a href="https://ermetasarim.github.io/forum" class="px-4 py-2 bg-slate-800 hover:bg-blue-600 text-white rounded-xl text-xs font-semibold">Aç</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="oyun" data-title="son nöbet">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-red-600 to-orange-600 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-shield-halved"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">Oyun</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Son Nöbet: Kriz Operasyonu</h3>
+                <p class="text-slate-400 text-sm mb-6">Güvenlik görevlisi odaklı taktiksel karar ve kriz yönetimi simülasyonu.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">sonnobet</span><a href="https://ermetasarim.github.io/sonnobet" class="px-4 py-2 bg-slate-800 hover:bg-red-600 text-white rounded-xl text-xs font-semibold">Oyna</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="arac" data-title="döviz altın">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-chart-line"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Finans</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Döviz & Altın Takibi</h3>
+                <p class="text-slate-400 text-sm mb-6">Anlık döviz kurları, altın fiyatları ve piyasa takibi.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">doviz</span><a href="https://ermetasarim.github.io/doviz/" class="px-4 py-2 bg-slate-800 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold">Takip Et</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="arac" data-title="bütçe kontrol finans tasarruf">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-wallet"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20">Finans Araç</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Bütçe Kontrol</h3>
+                <p class="text-slate-400 text-sm mb-6">Sıfır tabanlı bütçe, 50/30/20, plan-gerçek sapması, tasarruf hedefleri ve borç takibi.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">butce</span><a href="https://ermetasarim.github.io/butce/" class="px-4 py-2 bg-slate-800 hover:bg-teal-600 text-white rounded-xl text-xs font-semibold">Aç</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="arac" data-title="pomodoro odak">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-clock"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20">Verimlilik</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Odak</h3>
+                <p class="text-slate-400 text-sm mb-6">Pomodoro sayacı, kısa/uzun mola ve günün yapılacaklar listesi.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">pomodoro</span><a href="https://ermetasarim.github.io/pomodoro/" class="px-4 py-2 bg-slate-800 hover:bg-violet-600 text-white rounded-xl text-xs font-semibold">Aç</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="arac" data-title="altın gram birikim">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-yellow-500 to-amber-600 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-coins"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Finans</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Gram Birikim</h3>
+                <p class="text-slate-400 text-sm mb-6">Aylık altın alım simülasyonu, gram birikimi ve portföy değeri.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">altin</span><a href="https://ermetasarim.github.io/altin/" class="px-4 py-2 bg-slate-800 hover:bg-yellow-500 text-white rounded-xl text-xs font-semibold">Simüle Et</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="uygulama" data-title="film dizi izleme">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-clapperboard"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">Yaşam</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">İzleme Listesi</h3>
+                <p class="text-slate-400 text-sm mb-6">Film ve dizi rafı: sırada, izleniyor, bitti ve puanlama.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">izle</span><a href="https://ermetasarim.github.io/izle/" class="px-4 py-2 bg-slate-800 hover:bg-rose-600 text-white rounded-xl text-xs font-semibold">Listeyi Aç</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="uygulama" data-title="etkinlik bilet">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-fuchsia-600 to-purple-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-ticket"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20">Sahne</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Etkinlik Vitrini</h3>
+                <p class="text-slate-400 text-sm mb-6">Konser, tiyatro ve söyleşi vitrini. Bilet akışı demo.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">etkinlik</span><a href="https://ermetasarim.github.io/etkinlik/" class="px-4 py-2 bg-slate-800 hover:bg-fuchsia-600 text-white rounded-xl text-xs font-semibold">Vitrini Gör</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="kurumsal" data-title="dijital kartvizit">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-600 to-blue-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-id-card"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">Kurumsal</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Dijital Kartvizit</h3>
+                <p class="text-slate-400 text-sm mb-6">Pars Studio paylaşılabilir kartı: portföy, GitHub ve iletişim.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">kart</span><a href="https://ermetasarim.github.io/kart/" class="px-4 py-2 bg-slate-800 hover:bg-sky-600 text-white rounded-xl text-xs font-semibold">Kartı Aç</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="uygulama" data-title="yemek tarifleri">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-utensils"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">Yaşam</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Yemek Tarifleri</h3>
+                <p class="text-slate-400 text-sm mb-6">Adım adım anlatımlı pratik yemek tarifleri rehberi.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">yemek</span><a href="https://ermetasarim.github.io/yemek/" class="px-4 py-2 bg-slate-800 hover:bg-amber-500 text-white rounded-xl text-xs font-semibold">Tarifleri Gör</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="arac" data-title="hava durumu">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-cloud-sun"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Araç</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Hava Durumu</h3>
+                <p class="text-slate-400 text-sm mb-6">Konum tabanlı anlık hava ve haftalık tahmin.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">hava</span><a href="https://ermetasarim.github.io/hava/" class="px-4 py-2 bg-slate-800 hover:bg-cyan-500 text-white rounded-xl text-xs font-semibold">Aç</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="uygulama" data-title="namaz vakitleri">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-600 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-mosque"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20">Uygulama</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Namaz Vakitleri</h3>
+                <p class="text-slate-400 text-sm mb-6">Şehirlere göre namaz vakitleri, geri sayım ve ezan saati.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">namaz</span><a href="https://ermetasarim.github.io/namaz/" class="px-4 py-2 bg-slate-800 hover:bg-teal-600 text-white rounded-xl text-xs font-semibold">Vakitleri İncele</a></div>
+            </div>
         </div>
+        <div id="no-results" class="hidden text-center py-16">Aramanızla eşleşen proje yok.</div>
     </main>
+    <footer class="border-t border-slate-800/80 mt-20"><div class="max-w-7xl mx-auto px-4 py-8 text-slate-500 text-xs text-center">© <span id="year"></span> Pars Studio</div></footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        let activeCategory = 'all';
+        function filterProjects(){
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                card.style.display = (activeCategory === 'all' || category === activeCategory) ? 'flex' : 'none';
+            });
+            filterBtns.forEach(btn => {
+                const on = btn.getAttribute('data-category') === activeCategory;
+                btn.className = on
+                    ? 'filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-blue-600 text-white shadow-lg border border-blue-500'
+                    : 'filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800';
+            });
+        }
+        filterBtns.forEach(btn => btn.addEventListener('click', () => { activeCategory = btn.getAttribute('data-category'); filterProjects(); }));
+    </script>
 </body>
 </html>
