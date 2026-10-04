@@ -52,20 +52,39 @@
         <div class="text-center max-w-3xl mx-auto mb-12">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
                 <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                <span>12 Canlı Web Uygulaması</span>
+                <span>15 Canlı Web Uygulaması</span>
             </div>
             <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">Geliştirilen Projeler ve <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Dijital Deneyimler</span></h2>
         </div>
         <div class="mb-10">
             <div class="flex flex-wrap items-center gap-2" id="filter-tabs">
                 <button data-category="all" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-blue-600 text-white shadow-lg border border-blue-500">Tümü</button>
+                <button data-category="spor" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Spor</button>
                 <button data-category="uygulama" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Uygulamalar</button>
                 <button data-category="oyun" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Oyunlar</button>
                 <button data-category="arac" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Araçlar</button>
-                <button data-category="kurumsal" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Forum</button>
+                <button data-category="kurumsal" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-medium bg-slate-900/60 text-slate-400 border border-slate-800">Kurumsal</button>
             </div>
         </div>
         <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="spor" data-title="fenerbahçe süper lig skor">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-800 to-yellow-400 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-futbol"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Spor</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Fenerbahçe</h3>
+                <p class="text-slate-400 text-sm mb-6">Süper Lig ve Şampiyonlar Ligi skor, sonuç, puan durumu ve fikstür.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">fenerbahce</span><a href="https://ermetasarim.github.io/fenerbahce/" class="px-4 py-2 bg-slate-800 hover:bg-yellow-500 text-white rounded-xl text-xs font-semibold">Skoru Aç</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="spor" data-title="malatya yeşilyurtspor skor">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-rose-800 to-amber-400 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-futbol"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">Spor</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">Malatya Yeşilyurtspor</h3>
+                <p class="text-slate-400 text-sm mb-6">3. Lig canlı skor, sonuçlar, puan durumu ve fikstür.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">malatyaspor</span><a href="https://ermetasarim.github.io/malatyaspor/" class="px-4 py-2 bg-slate-800 hover:bg-rose-700 text-white rounded-xl text-xs font-semibold">Skoru Aç</a></div>
+            </div>
+            <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="oyun" data-title="csgopars cs2 oyuncu">
+                <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-crosshairs"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-500/10 text-orange-400 border border-orange-500/20">Oyun</span></div>
+                <h3 class="text-xl font-bold text-white mb-2">CSGOPARS</h3>
+                <p class="text-slate-400 text-sm mb-6">CS2 oyuncu kartı: rank, FACEIT, istatistik ve profil.</p></div>
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between"><span class="text-xs text-slate-500 font-mono">csgopars</span><a href="https://ermetasarim.github.io/csgopars/" class="px-4 py-2 bg-slate-800 hover:bg-orange-500 text-white rounded-xl text-xs font-semibold">Profili Aç</a></div>
+            </div>
             <div class="project-card glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1.5 glow-hover group relative overflow-hidden" data-category="kurumsal" data-title="forum">
                 <div><div class="flex items-center justify-between mb-4"><div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xl"><i class="fa-solid fa-laptop-code"></i></div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">Forum</span></div>
                 <h3 class="text-xl font-bold text-white mb-2">Topluluk Forumu</h3>
@@ -148,10 +167,14 @@
         const projectCards = document.querySelectorAll('.project-card');
         let activeCategory = 'all';
         function filterProjects(){
+            let visible = 0;
             projectCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                card.style.display = (activeCategory === 'all' || category === activeCategory) ? 'flex' : 'none';
+                const show = activeCategory === 'all' || category === activeCategory;
+                card.style.display = show ? 'flex' : 'none';
+                if (show) visible += 1;
             });
+            document.getElementById('no-results').classList.toggle('hidden', visible !== 0);
             filterBtns.forEach(btn => {
                 const on = btn.getAttribute('data-category') === activeCategory;
                 btn.className = on
